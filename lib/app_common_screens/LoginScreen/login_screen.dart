@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
+import 'package:money_guard/app_common_screens/SignupScreen/signup_screen.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -15,11 +17,44 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20.0),
-                const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 30.0,
+                IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 30.0,
+                  ),
+                  onPressed: () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Exit App"),
+                            content: const Text("Are you sure you want to exit?"),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                              ),
+                              TextButton(
+                                child: const Text("Exit"),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                  SystemNavigator.pop(); // Close the app
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
                 ),
+
                 const SizedBox(height: 40.0),
                 const Text(
                   'Log in to Money Guard',
@@ -147,6 +182,31 @@ class LoginPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an account? ",
+                      style: const TextStyle(color: Colors.white),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Signup',
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const SignupPage()),
+                              );
+                            },
+                        ),
+                      ],
                     ),
                   ),
                 ),

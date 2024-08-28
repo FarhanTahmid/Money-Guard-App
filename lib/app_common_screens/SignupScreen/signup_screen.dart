@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'package:money_guard/app_common_screens/LoginScreen/login_screen.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -15,10 +17,15 @@ class SignupPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20.0),
-                const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 30.0,
+                IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 30.0,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 const SizedBox(height: 40.0),
                 const Text(
@@ -104,34 +111,105 @@ class SignupPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 20.0),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Full Name',
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintText: 'Christiano Ronaldo',
+                    hintStyle: TextStyle(color: Colors.white54),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 20.0),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintText: 'Your password',
+                    hintStyle: TextStyle(color: Colors.white54),
+                    suffixIcon: Icon(
+                      Icons.visibility,
+                      color: Colors.white54,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 20.0),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintText: 'Enter your password again',
+                    hintStyle: TextStyle(color: Colors.white54),
+                    suffixIcon: Icon(
+                      Icons.visibility,
+                      color: Colors.white54,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 20.0),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.white,
                       disabledBackgroundColor: Colors.black,
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('Continue with Email',style: TextStyle(color: Colors.black),),
+                    child: const Text('Continue with Email'),
                   ),
                 ),
                 const SizedBox(height: 20.0),
                 Center(
                   child: RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'Already have an account? ',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       children: <TextSpan>[
                         TextSpan(
                           text: 'Login',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,
                           ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const LoginPage()),
+                              );
+                            },
                         ),
                       ],
                     ),
